@@ -46,6 +46,8 @@ Once the Warden application is running, you will need to change some settings on
 
 After about a minute, you should be able to refresh the Warden web interface to see some devices and traffic stats being recorded. (You may need to request an external website first to generate some WAN traffic)
 
+![DDWRT-Config](https://github.com/bthaase/DDWarden/raw/master/screenshots/DDWRT_Config.png "DD-WRT Example Configuration")
+
 ## Known Issues
 - Currently the 'monthly data cap' is hardcoded at 1 TB, this will be resolved when the internal settings page is completed.
 - Settings and About page are currently unimplemented. 
