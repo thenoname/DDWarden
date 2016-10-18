@@ -1,0 +1,25 @@
+{
+  "name": "netflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Haase",
+  "license": "ISC",
+  "dependencies": {
+    "Netflow": "0.0.1",
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "colors": "^1.1.2",
+    "dgram": "^1.0.1",
+    "express": "^4.14.0",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
+    "moment-timezone": "^0.5.6",
+    "request": "^2.75.0",
+    "sqlite3": "^3.1.6",
+    "validator": "^6.0.0"
+  }
+}

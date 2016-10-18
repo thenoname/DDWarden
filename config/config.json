@@ -1,0 +1,6 @@
+{
+	"DATABASE_FILENAME": "./dd-warden.db",
+	"RFLOW_PORT": 2055,
+	"MACUPD_PORT": 2056,
+	"HTTP_PORT": 8020
+}

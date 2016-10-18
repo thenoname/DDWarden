@@ -1,0 +1,77 @@
+<div class="container">
+	<div class='row'>
+		<div class="col-md-12" ng-if="!name"><h2>Traffic for All Devices</h2></div>
+		<div class="col-md-12" ng-if="name"><h2>Traffic for {{name}}</h2></div>
+	</div>
+	
+	<div class="row">
+	<div class="col-lg-12">		
+	
+	<uib-tabset justified="true">
+		<uib-tab select="enable(0)" deselect="disable(0)">
+			<uib-tab-heading>By Day</uib-tab-heading>
+			<div class='well'>
+				<div align='center'>
+					<p class="input-group">
+						<input type="text" ng-disabled="isLoading" class="form-control" uib-datepicker-popup="{{dayFormat}}" ng-change="loadCharts(dt)" ng-model="dt" is-open="datePicker.opened" datepicker-options="dayOptions" ng-required="true" close-text="Close" />				
+						<span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"/></button></span>
+					</p>
+				</div>
+				<div ng-if="tabActive[0]">
+					<div align='center' ng-show="isLoading"><b>Please wait, we are loading data.</b></div>
+					<div align='center' ng-show="!isLoading"><b>Showing data for {{dt | date:"EEEE, MMMM d, y"}}</b></div>
+					<div class='row'>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showTotal" type="checkbox" ng-change="remap()"> Show Total</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showSent" type="checkbox" ng-change="remap()"> Show Sent</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showRecv" type="checkbox" ng-change="remap()"> Show Received</label></div>					
+					</div>				
+					<canvas height='120' class="chart chart-bar" data="data[0]" labels="labels[0]" series="series" options="options" colours="chart.colors"></canvas>
+				</div>
+			</div>
+		</uib-tab>
+		<uib-tab select="enable(1)" deselect="disable(1)">
+			<uib-tab-heading>By Month</uib-tab-heading>
+			<div class='well'>
+				<div align='center'>
+					<p class="input-group">
+						<input type="text" ng-disabled="isLoading" class="form-control" uib-datepicker-popup="{{monthFormat}}" ng-change="loadCharts(dt)" ng-model="dt" is-open="datePicker.opened" datepicker-options="monthOptions" ng-required="true" close-text="Close" />				
+						<span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"/></button></span>
+					</p>
+				</div>
+				<div ng-if="tabActive[1]">
+					<div align='center' ng-show="isLoading"><b>Please wait, we are loading data.</b></div>
+					<div align='center' ng-show="!isLoading"><b>Showing data per day in {{dt | date:"MMMM, y"}}</b></div>
+					<div class='row'>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showTotal" type="checkbox" ng-change="remap()"> Show Total</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showSent" type="checkbox" ng-change="remap()"> Show Sent</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showRecv" type="checkbox" ng-change="remap()"> Show Received</label></div>					
+					</div>				
+					<canvas height='120' class="chart chart-bar" data="data[1]" labels="labels[1]" series="series" options="options" colours="chart.colors"></canvas>
+				</div>
+			</div>
+		</uib-tab>
+		<uib-tab select="enable(2)" deselect="disable(2)">
+			<uib-tab-heading>By Year</uib-tab-heading>			
+			<div class='well'>
+				<div align='center'>
+					<p class="input-group">
+						<input type="text" ng-disabled="isLoading" class="form-control" uib-datepicker-popup="{{yearFormat}}" ng-change="loadCharts(dt)" ng-model="dt" is-open="datePicker.opened" datepicker-options="yearOptions" ng-required="true" close-text="Close" />				
+						<span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="open()"><i class="fa fa-calendar"/></button></span>						
+					</p>
+				</div>
+				<div ng-if="tabActive[2]">
+					<div align='center' ng-show="isLoading"><b>Please wait, we are loading data.</b></div>
+					<div align='center' ng-show="!isLoading"><b>Showing data per month in {{dt | date:"y"}}</b></div>
+					<div class='row'>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showTotal" type="checkbox" ng-change="remap()"> Show Total</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showSent" type="checkbox" ng-change="remap()"> Show Sent</label></div>
+						<div class='col-md-4' align='center'><label class="form-check-label"><input class="form-check-input" ng-model="options.showRecv" type="checkbox" ng-change="remap()"> Show Received</label></div>					
+					</div>									
+					<canvas height='120' class="chart chart-bar" data="data[2]" labels="labels[2]" series="series" options="options" colours="chart.colors"></canvas>
+				</div>
+			</div>
+		</uib-tab>
+	</uib-tabset>
+	</div>
+	</div>
+</div>

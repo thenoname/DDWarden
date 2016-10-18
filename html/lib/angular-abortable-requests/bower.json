@@ -1,0 +1,31 @@
+{
+  "name": "ng-abortable-requests",
+  "version": "1.0.0",
+  "homepage": "https://github.com/sathify/ng-abortable-requests",
+  "authors": [
+    "sathify <satheesh7@gmail.com>"
+  ],
+  "description": "Abortable AJAX requests in AngularJS Applications",
+  "main": "src/request-factory.js",
+  "keywords": [
+    "AngularJS",
+    "angular",
+    "$resource",
+    "AJAX",
+    "abort",
+    "$http"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": ">=1",
+    "angular-mocks": "~1.2.20",
+    "angular-resource": "~1.2.21"
+  }
+}

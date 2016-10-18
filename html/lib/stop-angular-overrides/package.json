@@ -1,0 +1,60 @@
+{
+  "name": "stop-angular-overrides",
+  "description": "Prevents silent angular module / controller / filter / service / directive overrides",
+  "version": "0.5.1",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/bahmutov/stop-angular-overrides/issues"
+  },
+  "contributors": [
+    "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+    "Tilman Potthof <tilmanpotthof@gmail.com>"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "benv": "1.1.0",
+    "coveralls": "2.11.1",
+    "grunt": "0.4.5",
+    "grunt-cli": "0.1.13",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-deps-ok": "0.2.0",
+    "grunt-nice-package": "0.9.1",
+    "grunt-npm2bower-sync": "0.4.0",
+    "gt": "0.8.48",
+    "matchdep": "0.3.0",
+    "pre-git": "0.0.16",
+    "q": "1.4.0",
+    "time-grunt": "0.4.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": "> 0.8"
+  },
+  "homepage": "https://github.com/bahmutov/stop-angular-overrides",
+  "keywords": [
+    "angular",
+    "stop",
+    "debugging",
+    "testing",
+    "override"
+  ],
+  "license": "MIT",
+  "main": "stop-angular-overrides.js",
+  "pre-commit": [
+    "npm run build",
+    "npm test",
+    "npm version"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bahmutov/stop-angular-overrides.git"
+  },
+  "scripts": {
+    "build": "grunt",
+    "test": "gt --output test/*test.js",
+    "coveralls": "cat cover/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  }
+}
+

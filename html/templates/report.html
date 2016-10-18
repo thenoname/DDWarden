@@ -1,0 +1,111 @@
+<div class="container">
+	<!-- <div class='row'>
+		<div class="col-md-12"><h2>Network Overview</h2></div>
+	</div>
+	<div class='row'><div class='col-md-12'><HR SIZE='1'></div></div> -->
+	<!-- <div class='row'>
+		<div class='col-md-6' align='center'><select ng-model="sortMode" ng-options="item.name for item in sortOptions"></select></div>
+		<div class='col-md-6' align='center'><select ng-model="timeframe" ng-options="item.name for item in timeOptions" ng-change="UpdateTimeframe()"></select></div>
+	</div>
+	<div class='row'><div class='col-md-12'><HR SIZE='1'></div></div> -->
+	<div class='row'>
+		<div class='col-md-3'><div class='panel panel-default'>
+			<div class='panel-heading'>
+				<table width='100%'><tr><td align='center'>
+					<select ng-model="timeframe" ng-options="item.name for item in timeOptions" ng-change="UpdateTimeframe()"></select><BR/>
+					<input type="checkbox" ng-model="hideUnused"/> <SMALL>Hide Devices without traffic </SMALL>
+				</td></tr></table>
+			</div>
+		</div></div>
+		<div class='col-md-3'><div class='panel panel-default'>
+			<div class='panel-heading'>
+				<table width='100%'><tr>
+					<td align='center'><I CLASS='fa fa-cloud-upload fa-3x'/></td>
+					<td align='center'><B>WAN Outbound</B><BR/>{{ Totals.wanSent | bytes:2 }}</td>
+				</tr></table>
+			</div>
+		</div></div>
+		<div class='col-md-3'><div class='panel panel-default'>
+			<div class='panel-heading'>
+				<table width='100%'><tr>
+					<td align='center'><I CLASS='fa fa-cloud-download fa-3x'/></td>
+					<td align='center'><B>WAN Inbound</B><BR/>{{ Totals.wanRecv | bytes:2 }}</td>
+				</tr></table>
+			</div>
+		</div></div>
+		<div class='col-md-3'><div class='panel panel-default'>
+			<div class='panel-heading'>
+				<table width='100%'><tr>
+					<td align='center'><I CLASS='fa fa-cloud fa-3x'/></td>
+					<td align='center'><B>WAN Total</B><BR/>{{ Totals.wanTotal | bytes:2 }}</td>
+				</tr></table>
+			</div>
+		</div></div>
+		<div class='col-md-12' align='center'>
+			<small ng-if="Totals">Showing data gathered between <SPAN CLASS='text-success'>{{ Totals.begin }}</SPAN> and <SPAN CLASS='text-success'>{{ Totals.end }}</SPAN>. 
+			(<A HREF NG-CLICK='Refresh()'>Refresh Data</A>)</small><BR/><BR/>
+		</div>
+	</div>
+	<div class='row'><div class='col-md-12'>
+		<table class='table table-striped' st-table="safeDevices" st-safe-src="deviceList" style="font-size: 12px;">
+			<thead><tr>
+				<td>&nbsp;</td>
+				<td st-sort="nameIndex"><B>Nametag</B></td>
+				<td st-sort="ipIndex"><B>IP</B></td>
+				<td st-sort="mac"><B>MAC</B></td>
+				<td st-sort="discovered"><B>Discovered</B></td>
+				<td st-sort="lastseen"><B>Last Seen</B></td>
+				<td st-sort="stats.wanRecv" align='center'><B>Down</B></td>
+				<td st-sort="stats.wanRecv" align='center'><B>D %</B></td>
+				<td st-sort="stats.wanSent" align='center'><B>Up</B></td>
+				<td st-sort="stats.wanSent" align='center'><B>U %</B></td>
+				<td st-sort="stats.wanTotal" st-sort-default="reverse" align='center'><B>Total</B></td>
+				<td st-sort="stats.wanTotal" align='center'><B>T %</B></td>
+			</tr></thead>
+			<tbody>
+			<tr ng-repeat="d in safeDevices" NG-CLASS="{'text-muted':d.name == d.mac}" ng-if="!hideUnused || d.stats.wanTotal > 0">
+				<td width='20'><A HREF='#/edit/{{d.mac}}/{{d.name}}'><I CLASS='fa fa-pencil'/></A></td>
+				<td NG-IF="d.name != d.mac"><B><A HREF='#/charts/{{d.mac}}/{{d.name}}'>{{ d.name }}</A></B></td>
+				<td NG-IF="d.name == d.mac"><B><A HREF='#/charts/{{d.mac}}/{{d.name}}' CLASS='text-muted'>{{ d.name | uppercase }}</A></B></td>
+				<td><A HREF='http://{{ d.ip }}/' TARGET="_blank">{{ d.ip }}</A></td>
+				<td>
+					<I CLASS='fa fa-info-circle' NG-IF="OID[d.mac]" TITLE="{{ OID[d.mac] }}"/> 
+					<I CLASS='fa fa-times' NG-IF="!OID[d.mac]" TITLE="Unable to match MAC Vendor"/> 
+					{{ d.mac | uppercase }}
+				</td>				
+				<td><SPAN TITLE='{{ d.discovered | unixMoment | timeAgo }}'>{{ d.discovered | unixMoment | date:"short" }}</SPAN></td>
+				<td><SPAN TITLE='{{ d.lastseen | unixMoment | timeAgo }}'>{{ d.lastseen | unixMoment | date:"short" }}</SPAN></td>
+				<td ng-if="d.stats.live" align='center' style="background-color: #DDDDDD">{{ d.stats.wanRecv | bytes }}</td>
+				<td ng-if="d.stats.live" align='center' style="background-color: #DDDDDD">{{ d.stats.wanRecv | percentage:Totals.wanRecv:1 }}%</td>
+				<td ng-if="d.stats.live" align='center'>{{ d.stats.wanSent | bytes }}</td>
+				<td ng-if="d.stats.live" align='center'>{{ d.stats.wanSent | percentage:Totals.wanSent:1 }}%</td>
+				<td ng-if="d.stats.live" align='center' style="background-color: #DDDDDD">{{ d.stats.wanTotal | bytes }}</td>
+				<td ng-if="d.stats.live" align='center' style="background-color: #DDDDDD">{{ d.stats.wanTotal | percentage:Totals.wanTotal:1 }}%</td>
+				<td ng-if="!d.stats.live" align='center' style="background-color: #DDDDDD"><I CLASS='fa fa-spinner fa-spin'/></td>
+				<td ng-if="!d.stats.live" align='center' style="background-color: #DDDDDD"><I CLASS='fa fa-spinner fa-spin'/></td>
+				<td ng-if="!d.stats.live" align='center'><I CLASS='fa fa-spinner fa-spin'/></td>
+				<td ng-if="!d.stats.live" align='center'><I CLASS='fa fa-spinner fa-spin'/></td>
+				<td ng-if="!d.stats.live" align='center' style="background-color: #DDDDDD"><I CLASS='fa fa-spinner fa-spin'/></td>
+				<td ng-if="!d.stats.live" align='center' style="background-color: #DDDDDD"><I CLASS='fa fa-spinner fa-spin'/></td>
+			</tr>
+			</tbody>
+		</table>
+	</div></div>
+	<!--
+	<div class="row">
+	<div class="col-lg-4" ng-repeat="d in Devices | orderBy:sortMode.value">
+		<div class='panel panel-default'>
+		<div class='panel-heading'><B>{{ d.name | uppercase }}</B> <SPAN CLASS='pull-right' ALIGN='RIGHT'><A HREF='#/edit/{{d.mac}}/{{d.name}}'><I CLASS='fa fa-pencil'/></A></SPAN></div>
+		<table class='table'>
+			<tr><td>Host</td><td align='right'>{{ d.host | isEmpty: "(No Response)" }}</td></tr>
+			<tr><td>MAC</td><td align='right'>{{ d.mac | uppercase }}</td></tr>
+			<tr><td>IP</td><td align='right'>{{ d.ip | isEmpty:"Unknown" }}</td></tr>
+		</table>
+		<div class='panel-footer' align='center'>
+			<A HREF='#/device/{{d.mac}}'>View Details</A>
+		</div>
+		</div>
+	</div>
+	</div>
+	-->
+</div>

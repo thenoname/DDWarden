@@ -1,0 +1,26 @@
+{
+  "name": "stop-angular-overrides",
+  "main": "stop-angular-overrides.js",
+  "version": "0.5.1",
+  "homepage": "https://github.com/bahmutov/stop-angular-overrides",
+  "description": "Prevents silent angular module / controller / filter / service / directive overrides",
+  "keywords": [
+    "angular",
+    "stop",
+    "debugging",
+    "testing",
+    "override"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16"
+  },
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>"
+}

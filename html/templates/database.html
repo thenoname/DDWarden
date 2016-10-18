@@ -1,0 +1,18 @@
+<div class="container">
+	<div class='row'>
+		<div class="col-md-12"><h2>Database</h2><small>Information about the current status of the database.</small><BR/><BR/></div>
+	</div>
+	
+	<div class="row">
+	<div class="col-lg-12">		
+		
+	<table class='table table-striped'>
+		<tr><td><B>Size on Disk</B></td><td align='right'>{{ DB.dbSize | bytes }}</td></tr>
+		<tr><td><B>Earliest Record</B></td><td align='right'>{{ DB.minimumAge | date:"medium" }}</td></tr>
+		<tr><td><B>Device Traffic Records</B></td><td align='right'>{{ DB.trafficRows }} rows</td></tr>
+		<tr><td><B>Traffic Summary Records</B></td><td align='right'>{{ DB.totalsRows }} rows</td></tr>
+	</table>
+		
+	</div>
+	</div>
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+
+	<div class='row'><div class='col-md-12' align='center'>
+		<div class='panel panel-primary'>
+			<div class='panel-heading'><H3 style='margin: 0px;'>This Month - {{ Current.beginRaw | date:"MMMM yyyy" }}</H3></div>
+			<div class='panel-body'>
+				<div class='row'>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud-upload fa-3x'/></td>
+								<td align='center'><B>WAN Outbound</B><BR/>{{ Current.wanSent | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud-download fa-3x'/></td>
+								<td align='center'><B>WAN Inbound</B><BR/>{{ Current.wanRecv | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud fa-3x'/></td>
+								<td align='center'><B>WAN Total</B><BR/>{{ Current.wanTotal | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-{{currentTheme}}'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-calendar fa-3x'/></td>
+								<td align='center'><B>Data Cap Usage</B><BR/>{{ currentProgress }}% of {{ dataCap | bytes: 1 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+				</div>
+				<div class='row' ng-if="data[0]"><div class='col-md-12'>
+					<canvas height='200' class="chart chart-line" data="data[0]" labels="labels[0]" series="series" options="options"></canvas>
+				</div></div>				
+			</div>
+		</div>
+	</div></div>
+	
+	<div class='row' ng-if="Previous && !Previous.wanTotal"><div class='col-md-12' align='center'>
+		<div class='panel panel-primary'>
+			<div class='panel-heading'><H3 style='margin: 0px;'>Previous Month - {{ Previous.beginRaw | date:"MMMM yyyy" }}</H3></div>
+			<div class='panel-body' align='center'>
+				<BR/>There is no traffic recorded for this timeframe.<BR/><BR/>
+			</div>
+		</div>
+	</div></div>
+	
+	<div class='row' ng-if="!Previous || Previous.wanTotal"><div class='col-md-12' align='center'>
+		<div class='panel panel-primary'>
+			<div class='panel-heading'><H3 style='margin: 0px;'>Previous Month - {{ Previous.beginRaw | date:"MMMM yyyy" }}</H3></div>
+			<div class='panel-body'>
+				<div class='row'>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud-upload fa-3x'/></td>
+								<td align='center'><B>WAN Outbound</B><BR/>{{ Previous.wanSent | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud-download fa-3x'/></td>
+								<td align='center'><B>WAN Inbound</B><BR/>{{ Previous.wanRecv | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-default'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-cloud fa-3x'/></td>
+								<td align='center'><B>WAN Total</B><BR/>{{ Previous.wanTotal | bytes:2 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+					<div class='col-md-3'><div class='panel panel-{{previousTheme}}'>
+						<div class='panel-heading'>
+							<table width='100%'><tr>
+								<td align='center'><I CLASS='fa fa-calendar fa-3x'/></td>
+								<td align='center'><B>Data Cap Usage</B><BR/>{{ previousProgress }}% of {{ dataCap | bytes: 1 }}</td>
+							</tr></table>
+						</div>
+					</div></div>
+				</div>
+				<div class='row' ng-if="data[1]"><div class='col-md-12'>
+					<canvas height='200' class="chart chart-line" data="data[1]" labels="labels[1]" series="series" options="options"></canvas>
+				</div></div>				
+			</div>
+		</div>
+
+	</div></div>
+</div>
