@@ -1,0 +1,21 @@
+<div class="container">
+	<div class='row'>
+		<div class="col-md-12">
+			<h2>About DD-Warden</h2>
+		</div>
+		<div class="col-md-12"><small>
+			Warden is an open source, personal use netflow collector designed for use with DD-WRT Routers. It provides metrics on network use by device,
+			allowing you to find your biggest internet bandwidth hogs, and helping ensure you don't exceed your bandwidth caps for the month. &nbsp;&nbsp;
+			(<a href='https://github.com/bthaase/DDWarden'><I CLASS='fa fa-github'/> Github Page</a>)
+			<BR/><BR/>
+			DDWarden is written in NodeJS. It acts as an RFlow and MACupd collector for use with DD-WRT Routers to gather information about network traffic between your local devices and the WAN interface. The vast majority of the netflow data is discarded, as this tool is only intended to give you a traffic breakdown per device, over a given timeframe. This allows us to keep the database small as well. Collected stats are stored in a SQLite3 database.
+			<BR/><BR/>
+			Traffic information is recorded every minute, and the device reporting page can give small increment views (last 5 minutes, 10 minutes, etc) - Every hour, the previous hours information is compacted into a single hour-long traffic record for each device, allowing us to store long-term data without creating a massive database.
+			<BR/><BR/>
+			The reporting interface is AngularJS 1.5 and collects information from the Node application to render it's graphs and data views.
+		</small></div>		
+		<div class="col-md-12">
+			<BR/><b>You are running version 1.0 of DDWarden.</b>
+		</div>
+	</div>	
+</div>

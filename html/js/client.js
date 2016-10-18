@@ -23,7 +23,6 @@ var directives = angular.module('Angsty.directives', []);
 app.config(['stConfig', '$routeProvider', '$resourceProvider', function(stConfig, $routeProvider, $resourceProvider) {
 	console.log("Configuring application, running on angular " + angular.version.full);
 	
-	// $routeProvider.when('/', { controller:'DashboardController', templateUrl:'templates/dashboard.html' });
 	$routeProvider.when('/', { controller:'OverviewController', templateUrl:'templates/overview.html' });
 	$routeProvider.when('/report', { controller:'ReportController', templateUrl:'templates/report.html' });
 	$routeProvider.when('/charts', { controller:'ChartsController', templateUrl:'templates/charts.html' });
@@ -31,10 +30,7 @@ app.config(['stConfig', '$routeProvider', '$resourceProvider', function(stConfig
 	$routeProvider.when('/charts/:mac/:name', { controller:'ChartsController', templateUrl:'templates/charts.html' });
 	$routeProvider.when('/db', { controller:'DatabaseController', templateUrl:'templates/database.html' });
 	$routeProvider.when('/edit/:id/:name', { controller: 'DeviceEditController', templateUrl:'templates/edit_device.html' });
-
-	// EXAMPLE:
-	// $routeProvider.when('/hospital/', { controller: 'HospitalController', templateUrl:'partials/hospital/hospital.html' });
-	// $routeProvider.when('/hospital/:id', { controller: 'HospitalController', templateUrl:'partials/hospital/hospital.html' });
+	$routeProvider.when('/about', { controller:'AboutController', templateUrl:'templates/about.html' });
 
 	$routeProvider.otherwise({redirectTo: '/'});
 }]);	
@@ -47,21 +43,9 @@ app.run(['$rootScope', '$route', '$templateCache', '$location', '$cookieStore', 
 	for (var i in $route.routes) {
 		if ($route.routes[i].preload !== false) {
 			if (url = $route.routes[i].templateUrl) {
-				// console.log("Preloading: " + url);
 				$http.get(url, { cache: $templateCache });
 			}
 		}
 	}
 
-	// Location Management - Useful for blocking navigation until logged in.
-	/*
-	$rootScope.$on('$locationChangeStart', function (event, next, current) {
-		// redirect to login page if not logged in
-		if ($location.path() !== '/login' && !AuthService.IsLoggedIn()) {
-			console.log("AuthGate: Not logged in. No access to " + $location.path());
-			AuthService.SetLoginRedirect($location.path());
-			$location.path('/login');
-		}
-	});	
-	*/
 }]);

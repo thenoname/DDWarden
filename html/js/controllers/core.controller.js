@@ -7,6 +7,10 @@ app.controller('HeaderController', function ($scope, $rootScope, CoreResource, O
 	});
 });
 
+app.controller('AboutController', function ($scope, $rootScope, CoreResource, OIDResource) {
+	$scope.root = $rootScope;
+});
+
 app.controller('OverviewController', function ($scope, $rootScope, CoreResource, OIDResource) {
 	$scope.Current = null;
 	$scope.Previous = null;
